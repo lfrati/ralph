@@ -6,7 +6,7 @@ Ralph is an autonomous AI agent loop that runs AI coding tools ([Claude Code](ht
 
 Based on [Geoffrey Huntley's Ralph pattern](https://ghuntley.com/ralph/).
 
-[Read my in-depth article on how I use Ralph](https://x.com/ryancarson/status/2008548371712135632)
+This is a fork of [snarktank/ralph](https://github.com/snarktank/ralph) by Ryan Carson. [Read his in-depth article on how he uses Ralph](https://x.com/ryancarson/status/2008548371712135632).
 
 ## Prerequisites
 
@@ -104,7 +104,7 @@ This creates `prd.json` with user stories structured for autonomous execution.
 
 Default is 10 iterations. Use `--tool claude|codex|pi` to select your AI coding tool. Each tool has a default prompt file (see Key Files); pass `--prompt path/to/file.md` to use a different one.
 
-Every backend is driven the same way: run the CLI unattended with permission prompts disabled, feed it the prompt, and read the agent's final message from stdout. Adding another tool is one more `case` branch in `ralph.sh`.
+Every backend is driven the same way: run the CLI unattended with permission prompts disabled, feed it the prompt, and read the agent's final message (from stdout, or from a file the tool writes it to). Adding another tool is one more `case` branch in `ralph.sh`.
 
 Ralph will:
 1. Create a feature branch (from PRD `branchName`)
@@ -169,11 +169,11 @@ Too big (split these):
 - "Add authentication"
 - "Refactor the API"
 
-### AGENTS.md Updates Are Critical
+### AGENTS.md / CLAUDE.md Updates Are Critical
 
-After each iteration, Ralph updates the relevant `AGENTS.md` files with learnings. This is key because AI coding tools automatically read these files, so future iterations (and future human developers) benefit from discovered patterns, gotchas, and conventions.
+After each iteration, Ralph updates the relevant instructions files with learnings: `AGENTS.md` for Codex and pi, `CLAUDE.md` for Claude Code. This is key because AI coding tools automatically read these files, so future iterations (and future human developers) benefit from discovered patterns, gotchas, and conventions.
 
-Examples of what to add to AGENTS.md:
+Examples of what to add:
 - Patterns discovered ("this codebase uses X for Y")
 - Gotchas ("do not forget to update Z when changing W")
 - Useful context ("the settings panel is in component X")
@@ -187,7 +187,7 @@ Ralph only works if there are feedback loops:
 
 ### Browser Verification for UI Stories
 
-Frontend stories must include "Verify in browser using dev-browser skill" in acceptance criteria. Ralph will use the dev-browser skill to navigate to the page, interact with the UI, and confirm changes work.
+Frontend stories should include "Verify in browser" in their acceptance criteria. If the agent has a browser tool available (for example a browser MCP server or a dev-browser skill), it will navigate to the page, interact with the UI, and confirm changes work. If not, the prompt tells it to note in `progress.txt` that manual browser verification is needed.
 
 ### Stop Condition
 
@@ -223,3 +223,5 @@ Ralph automatically archives previous runs when you start a new feature (differe
 
 - [Geoffrey Huntley's Ralph article](https://ghuntley.com/ralph/)
 - [Claude Code documentation](https://docs.anthropic.com/en/docs/claude-code)
+- [Codex CLI documentation](https://developers.openai.com/codex/cli)
+- [pi documentation](https://pi.dev)
