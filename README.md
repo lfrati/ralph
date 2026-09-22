@@ -50,7 +50,7 @@ cp -r skills/ralph ~/.claude/skills/
 Add the Ralph marketplace to Claude Code:
 
 ```bash
-/plugin marketplace add snarktank/ralph
+/plugin marketplace add lfrati/ralph
 ```
 
 Then install the skills:
