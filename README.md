@@ -19,9 +19,7 @@ This is a fork of [snarktank/ralph](https://github.com/snarktank/ralph) by Ryan 
 
 ## Setup
 
-### Option 1: Copy to your project
-
-Copy the ralph files into your project:
+### 1. Copy the loop into your project
 
 ```bash
 # From your project root
@@ -36,34 +34,16 @@ cp /path/to/ralph/prompt-generic.md scripts/ralph/prompt-generic.md  # For Codex
 chmod +x scripts/ralph/ralph.sh
 ```
 
-### Option 2: Install skills globally (Claude Code)
+### 2. Install the skills
 
-Copy the skills to your Claude Code config for use across all projects:
-
-```bash
-cp -r skills/prd ~/.claude/skills/
-cp -r skills/ralph ~/.claude/skills/
-```
-
-### Option 3: Use as Claude Code Marketplace
-
-Add the Ralph marketplace to Claude Code:
+Copy the two planning skills into your AI tool's skills folder:
 
 ```bash
-/plugin marketplace add lfrati/ralph
+cp -r skills/prd skills/ralph ~/.claude/skills/   # Claude Code
+cp -r skills/prd skills/ralph ~/.agents/skills/   # Codex and pi
 ```
 
-Then install the skills:
-
-```bash
-/plugin install ralph-skills@ralph-marketplace
-```
-
-Available skills after installation:
-- `/prd` - Generate Product Requirements Documents
-- `/ralph` - Convert PRDs to prd.json format
-
-Skills are automatically invoked when you ask Claude to:
+Skills are automatically invoked when you ask your tool to:
 - "create a prd", "write prd for", "plan this feature"
 - "convert this prd", "turn into ralph format", "create prd.json"
 
